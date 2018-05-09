@@ -144,8 +144,8 @@ var players: [[String: String]] = [
 
 
 // creating seperate dictionaries will be helpful in future team sorting.
-var experiencePlayers = [[String: Any]]()
-var inexperiencedPlayers = [[String: Any]]()
+var playerHasExperience = [[String: String]]()
+var playerHasNoExperience = [[String: String]]()
 
 
 // This loop will iterate through the players dictionary, check the experience key, and append each player to the
@@ -153,9 +153,9 @@ var inexperiencedPlayers = [[String: Any]]()
 
 for player in players {
     if player["experience"] == "true" {
-        experiencePlayers.append(player)
+        playerHasExperience.append(player)
     } else {
-        inexperiencedPlayers.append(player)
+        playerHasNoExperience.append(player)
 }
 }
 
@@ -164,36 +164,35 @@ for player in players {
 
 // create teams and details
 
-var teamSharks: [[String: Any]] = []
-var teamDragons: [[String: Any]] = []
-var teamRaptors: [[String: Any]] = []
+var teamSharks: [[String: String]] = []
+var teamDragons: [[String: String]] = []
+var teamRaptors: [[String: String]] = []
 
+var teams = [teamSharks, teamDragons, teamRaptors]
 
 //Iterate through experienced and inexperienced players.
 
-var i = 0
+
 
 for player in players {
     if player["experience"] == "true" {
-        switch i % 3 {
+        switch players.count % teams.count {
         case 0: teamSharks.append(player)
         case 1: teamDragons.append(player)
         case 2: teamRaptors.append(player)
         default: print("Error!")
         }
-        i += 1
     }
 }
 
 for player in players {
     if player["experience"] == "false" {
-        switch i % 3 {
+        switch players.count % teams.count {
         case 0: teamSharks.append(player)
         case 1: teamDragons.append(player)
         case 2: teamRaptors.append(player)
         default: print("Error!")
         }
-        i += 1
     }
 }
 
@@ -202,15 +201,25 @@ for player in players {
 // the guardians, letting them know which team the child has been placed on and when they should attend their
 // first team team practice.
 
-for player in teamSharks {
-    print(("Dear \(player["guardian"]!),\nCongratulations! \(player["name"]!) is a Shark! I would like to let you know the first practice is March 17th at 3pm.\nSee you there, and let's go Sharks!\n"))
+var sharksPracticeDate = "March 17th at 3pm"
+var dragonsPracticeDate = "March 17th at 1pm"
+var raptorsPracticeDate = "March 18th at 1pm"
+
+
+
+// This function will allow a user to iterate over all letters at once.
+
+func playerLetters() {
+    for player in teamSharks {
+        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Dragon! I would like to let you know the first practice is \(sharksPracticeDate). See you there, and go Sharks!")
+    }
+    for player in teamDragons {
+        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Shark! I would like to let you know the first practice is \(dragonsPracticeDate). See you there, and go Dragons!")
+    }
+    for player in teamRaptors {
+        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Raptor! I would like to let you know the first practice is \(raptorsPracticeDate). See you there, and go Raptors!")
+
+    }
 }
 
-for player in teamDragons {
-    print(("Dear \(player["guardian"]!),\nCongratulations! \(player["name"]!) is a Dragon! I would like to let you know the first practice is March 17th at 1pm.\nSee you there, and let's go Dragons!\n"))
-}
-
-for player in teamRaptors {
-    print(("Dear \(player["guardian"]!),\nCongratulations! \(player["name"]!) is a Raptor! I would like to let you know the first practice is March 18th at 1pm.\nSee you there, and let's go Raptors!\n"))
-}
-
+playerLetters()
