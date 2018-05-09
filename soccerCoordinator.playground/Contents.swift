@@ -211,10 +211,10 @@ var raptorsPracticeDate = "March 18th at 1pm"
 
 func playerLetters() {
     for player in teamSharks {
-        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Dragon! I would like to let you know the first practice is \(sharksPracticeDate). See you there, and go Sharks!")
+        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Shark! I would like to let you know the first practice is \(sharksPracticeDate). See you there, and go Sharks!")
     }
     for player in teamDragons {
-        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Shark! I would like to let you know the first practice is \(dragonsPracticeDate). See you there, and go Dragons!")
+        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Dragon! I would like to let you know the first practice is \(dragonsPracticeDate). See you there, and go Dragons!")
     }
     for player in teamRaptors {
         print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Raptor! I would like to let you know the first practice is \(raptorsPracticeDate). See you there, and go Raptors!")
