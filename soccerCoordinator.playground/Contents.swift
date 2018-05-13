@@ -173,53 +173,84 @@ var teams = [teamSharks, teamDragons, teamRaptors]
 //Iterate through experienced and inexperienced players.
 
 
+var maxExpTeamCount = (playerHasExperience.count / teams.count)
 
-for player in players {
-    if player["experience"] == "true" {
-        switch players.count % teams.count {
-        case 0: teamSharks.append(player)
-        case 1: teamDragons.append(player)
-        case 2: teamRaptors.append(player)
-        default: print("Error!")
-        }
+var maxNoExpTeamCount = (playerHasNoExperience.count / teams.count)
+
+for player in playerHasExperience {
+
+    if (teamSharks.count < maxExpTeamCount){
+        teamSharks.append(player)
     }
+    else if teamDragons.count < maxExpTeamCount {
+        teamDragons.append(player)
+    }
+    else if teamRaptors.count < maxExpTeamCount {
+        teamRaptors.append(player)
+    }
+    
 }
 
-for player in players {
-    if player["experience"] == "false" {
-        switch players.count % teams.count {
-        case 0: teamSharks.append(player)
-        case 1: teamDragons.append(player)
-        case 2: teamRaptors.append(player)
-        default: print("Error!")
-        }
+for player in playerHasNoExperience {
+    //loop through all inexperienced players, if a team has its maximum number of exp players + inexp players, move onto next team until completion
+    
+    if (teamSharks.count < maxNoExpTeamCount + maxExpTeamCount){
+        teamSharks.append(player)
     }
+    else if (teamDragons.count < maxNoExpTeamCount + maxExpTeamCount) {
+        teamDragons.append(player)
+    }
+    else if (teamRaptors.count < maxNoExpTeamCount + maxExpTeamCount) {
+        teamRaptors.append(player)
+    }
+    
 }
 
 
-// Part 3: ** Write code that iterates through all three teams of players and generates a personalized letter t
-// the guardians, letting them know which team the child has been placed on and when they should attend their
-// first team team practice.
+// I would like to continue working on the switch statement below, because ultimately it
+// should be faster than the if/else if statement above. This is a workin progress and I don't
+// want to lose the code I've worked on for this.
+
+//for player in players {
+//    if player["experience"] == "false" {
+//        switch players.count / teams.count {
+//        case 0: teamSharks.append(player)
+//        case 1: teamDragons.append(player)
+//        case 2: teamRaptors.append(player)
+//        default: print("Error!")
+//        }
+//    }
+//}
+
+
+// Part 3: ** Write code that iterates through all three teams of players and generates
+// a personalized letter to the guardians, letting them know which team the child has been
+// placed on and when they should attend their first team team practice.
 
 var sharksPracticeDate = "March 17th at 3pm"
 var dragonsPracticeDate = "March 17th at 1pm"
 var raptorsPracticeDate = "March 18th at 1pm"
 
 
+var letters: [String] = []
 
-// This function will allow a user to iterate over all letters at once.
-
-func playerLetters() {
-    for player in teamSharks {
-        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Shark! I would like to let you know the first practice is \(sharksPracticeDate). See you there, and go Sharks!")
+for player in teamSharks {
+    let letter = "Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Shark! I would like to let you know the first practice is \(sharksPracticeDate). See you there, and go Sharks!"
+    letters.append(letter)
+    print(letter)
+        
     }
-    for player in teamDragons {
-        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Dragon! I would like to let you know the first practice is \(dragonsPracticeDate). See you there, and go Dragons!")
+for player in teamDragons {
+    let letter = "Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Dragon! I would like to let you know the first practice is \(dragonsPracticeDate). See you there, and go Dragons!"
+    letters.append(letter)
+    print(letter)
     }
-    for player in teamRaptors {
-        print("Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Raptor! I would like to let you know the first practice is \(raptorsPracticeDate). See you there, and go Raptors!")
-
+for player in teamRaptors {
+    let letter = "Dear \(player["guardian"]!), Congratulations! \(player["name"]!) is a Raptor! I would like to let you know the first practice is \(raptorsPracticeDate). See you there, and go Raptors!"
+    letters.append(letter)
+    print(letter)
     }
-}
 
-playerLetters()
+
+print(letters.count)
+
